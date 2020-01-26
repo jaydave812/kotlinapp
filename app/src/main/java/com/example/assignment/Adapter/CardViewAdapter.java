@@ -3,9 +3,7 @@ package com.example.assignment.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,20 +13,20 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.assignment.Model.DataItem;
-import com.example.assignment.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.example.assignment.R;
+import com.example.assignment.model.DataItem;
+
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CardViewAdapter  extends RecyclerView.Adapter<CardViewAdapter.ViewHolder> {
+public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHolder> {
 
-    private List<DataItem> itemList = new ArrayList<>();
+    private List<DataItem> itemList;
     private LayoutInflater mInflater;
     private Context context;
 
@@ -88,7 +86,8 @@ public class CardViewAdapter  extends RecyclerView.Adapter<CardViewAdapter.ViewH
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
                                             }
-                                        });
+                                        }
+                                );
 
                                 builder1.setNegativeButton(
                                         "No",
@@ -96,7 +95,8 @@ public class CardViewAdapter  extends RecyclerView.Adapter<CardViewAdapter.ViewH
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
                                             }
-                                        });
+                                        }
+                                );
 
                                 alert11 = builder1.create();
                                 alert11.show();
@@ -111,7 +111,8 @@ public class CardViewAdapter  extends RecyclerView.Adapter<CardViewAdapter.ViewH
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
                                             }
-                                        });
+                                        }
+                                );
 
                                 builder1.setNegativeButton(
                                         "No",
@@ -119,7 +120,8 @@ public class CardViewAdapter  extends RecyclerView.Adapter<CardViewAdapter.ViewH
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
                                             }
-                                        });
+                                        }
+                                );
 
                                 alert11 = builder1.create();
                                 alert11.show();
@@ -144,10 +146,11 @@ public class CardViewAdapter  extends RecyclerView.Adapter<CardViewAdapter.ViewH
 
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder  {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, lastName, emailAddress;
         CircleImageView profile;
         ImageView postIcon;
+
         ViewHolder(View itemView) {
             super(itemView);
 
@@ -155,7 +158,7 @@ public class CardViewAdapter  extends RecyclerView.Adapter<CardViewAdapter.ViewH
             lastName = itemView.findViewById(R.id.lastname);
             emailAddress = itemView.findViewById(R.id.emailAddress);
             profile = itemView.findViewById(R.id.profilePhoto);
-            postIcon=itemView.findViewById(R.id.postMenu);
+            postIcon = itemView.findViewById(R.id.postMenu);
         }
 
     }

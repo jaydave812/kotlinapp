@@ -1,24 +1,23 @@
 package com.example.assignment.Views;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.assignment.Adapter.CardViewAdapter;
+import com.example.assignment.R;
+import com.example.assignment.Services.Retrofit;
+import com.example.assignment.model.DataItem;
+import com.example.assignment.model.ModelClass;
+
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
-import android.view.View;
-
-import com.example.assignment.Adapter.CardViewAdapter;
-import com.example.assignment.Model.DataItem;
-import com.example.assignment.Model.ModelClass;
-import com.example.assignment.R;
-import com.example.assignment.Services.Retrofit;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getUserData() {
-        Call<ModelClass> call = Retrofit.getApi_services().getUsersList(1);
+        Call<ModelClass> call = Retrofit.getApi_services().getUsersList();
         call.enqueue(new Callback<ModelClass>() {
             @Override
             public void onResponse(Call<ModelClass> call, Response<ModelClass> response) {
