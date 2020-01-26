@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.assignment.R;
-import com.example.assignment.model.DataItem;
+import com.example.assignment.model.User;
 
 import java.util.List;
 
@@ -26,12 +26,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHolder> {
 
-    private List<DataItem> itemList;
+    private List<User> itemList;
     private LayoutInflater mInflater;
     private Context context;
 
     // data is passed into the constructor
-    public CardViewAdapter(Context context, List<DataItem> itemList) {
+    public CardViewAdapter(Context context, List<User> itemList) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.itemList = itemList;
@@ -49,7 +49,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final DataItem itemsItem = itemList.get(position);
+        final User itemsItem = itemList.get(position);
         holder.name.setText(itemsItem.getFirstName());
         Glide.with(context).load(itemsItem.getAvatar()).into(holder.profile);
         holder.lastName.setText(itemsItem.getLastName().trim());

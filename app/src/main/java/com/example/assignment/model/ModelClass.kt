@@ -1,5 +1,7 @@
 package com.example.assignment.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class ModelClass(
@@ -8,19 +10,25 @@ data class ModelClass(
     @SerializedName("total")
     var total: Int,
     @SerializedName("data")
-    var data: List<DataItem>?,
+    var data: List<User>?,
     @SerializedName("page")
     var page: Int,
     @SerializedName("total_pages")
     var totalPages: Int
-) {
-    override fun toString(): String {
-        return "ModelClass{" +
-            "per_page = '" + perPage + '\'' +
-            ",total = '" + total + '\'' +
-            ",data = '" + data + '\'' +
-            ",page = '" + page + '\'' +
-            ",total_pages = '" + totalPages + '\'' +
-            "}"
-    }
-}
+)
+
+@Entity(tableName = "user_table")
+data class User(
+    @PrimaryKey
+    @SerializedName("id")
+    var id: Int,
+
+    @SerializedName("last_name")
+    var lastName: String?,
+    @SerializedName("avatar")
+    var avatar: String?,
+    @SerializedName("first_name")
+    var firstName: String?,
+    @SerializedName("email")
+    var email: String?
+)

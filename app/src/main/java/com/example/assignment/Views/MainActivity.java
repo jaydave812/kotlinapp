@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.assignment.Adapter.CardViewAdapter;
 import com.example.assignment.R;
 import com.example.assignment.Services.Retrofit;
-import com.example.assignment.model.DataItem;
 import com.example.assignment.model.ModelClass;
+import com.example.assignment.model.User;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CardViewAdapter cardViewAdapter;
-    private ArrayList<DataItem> modelClasses;
+    private ArrayList<User> modelClasses;
     private LinearLayoutManager manager;
 
     @Override
