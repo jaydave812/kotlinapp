@@ -1,7 +1,6 @@
 package com.example.assignment.Adapter;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.view.Gravity;
@@ -19,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.assignment.R;
 import com.example.assignment.model.User;
+import com.example.assignment.views.MainActivity;
 
 import java.util.List;
 
@@ -28,10 +28,10 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     private List<User> itemList;
     private LayoutInflater mInflater;
-    private Context context;
+    private MainActivity context;
 
     // data is passed into the constructor
-    public CardViewAdapter(Context context, List<User> itemList) {
+    public CardViewAdapter(MainActivity context, List<User> itemList) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.itemList = itemList;
@@ -48,7 +48,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final User itemsItem = itemList.get(position);
         holder.name.setText(itemsItem.getFirstName());
         Glide.with(context).load(itemsItem.getAvatar()).into(holder.profile);
@@ -85,6 +85,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
+                                                context.deleteUser(itemList.get(position));
                                             }
                                         }
                                 );
