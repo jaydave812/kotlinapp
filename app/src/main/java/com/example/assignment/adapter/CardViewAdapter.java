@@ -1,13 +1,16 @@
-package com.example.assignment.Adapter;
+package com.example.assignment.adapter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -110,6 +113,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
                                         "Yes",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
+                                                showAddNoteDialog(position);
                                                 dialog.cancel();
                                             }
                                         }
@@ -163,4 +167,94 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
         }
 
     }
+// This function is use for showing dialog box layout
+    public void showAddNoteDialog(final int position) {
+        // create an alert builder
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+
+        // set the custom layout
+        final View customLayout = LayoutInflater.from(context).inflate(R.layout.add_user_dialog, null);
+        builder.setView(customLayout);
+
+        TextView send_btn = (TextView) customLayout.findViewById(R.id.send_btn);
+        TextView cancel_btn = (TextView) customLayout.findViewById(R.id.cancel_btn);
+
+        final EditText note = (EditText) customLayout.findViewById(R.id.add_note_et);
+        final EditText lastname=(EditText)customLayout.findViewById(R.id.lastName);
+        final EditText emailAddress=(EditText)customLayout.findViewById(R.id.emailAddress);
+//        This textchange listner which is used for the add value to db
+        note.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                itemList.get(position).setFirstName(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        lastname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                itemList.get(position).setLastName(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        emailAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                itemList.get(position).setEmail(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        note.setFocusable(true);
+        note.setFocusableInTouchMode(true);
+        note.setCursorVisible(true);
+        note.setClickable(true);
+        // create and show the alert dialog
+        final androidx.appcompat.app.AlertDialog dialog = builder.create();
+
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+//on send_bt  user can edit there value
+        send_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.updateUser(itemList.get(position));
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+    }
+
 }

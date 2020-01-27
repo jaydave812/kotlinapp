@@ -21,7 +21,7 @@ class MainActivityViewModel(
     private val call: Call<ModelClass> = Retrofit.getApi_services().usersList
 
     val userData get() = database.getAllUser()
-
+//here api is call to store data in local database
     fun getUserListFromApi() {
         call.enqueue(object : Callback<ModelClass?> {
             override fun onResponse(
@@ -43,7 +43,7 @@ class MainActivityViewModel(
             }
         })
     }
-
+//these are delete,edit and insert function use for delete user in db
     fun deleteUser(user: User) {
         doAsync {
             database.deleteUser(user)
@@ -53,6 +53,12 @@ class MainActivityViewModel(
     fun updateUser(user: User) {
         doAsync {
             database.update(user)
+        }
+    }
+
+    fun insertUser(user: User) {
+        doAsync {
+            database.insert(user)
         }
     }
 }
